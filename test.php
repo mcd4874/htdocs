@@ -6,6 +6,6 @@
 
 <body>
     <h1>Shirt 4 Minh</h1>
-    <p>&copy   Year 20<?php echo date('y'); ?> Shirt 4 Minh </p>
+    <p>&copy 20<?php echo date('y'); ?> Shirt 4 Minh </p>
 </body>
 </html>
