@@ -16,7 +16,10 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     $information=$information."Message: ".$message."\n";
     //To Do:send email
     //After php code process, redirect the webpage to other page.
-    header("location: contact-thank.php");
+    //We want to redirect back to contact page and use if statement. So we set the status=thanks
+    //to call the $_SEVER['status']=thanks
+    header("location: contact.php?status=thanks");
+    exit;
 }
 ?>
 <?php
@@ -28,9 +31,11 @@ include('inc/header.php'); ?>
         <div class="wrapper">
 
             <h1>Contact</h1>
-
+            <!--$_GET will check the variable at the end of web address from the above code. If we process the code then our status will exist and we can process the if statment-->
+            <?php if(isset($_GET['status']) && $_GET['status']=='thanks'){ ?>
+                <p>Thank for the email.I&rsquo;ll be in touch with you soon</p>
+            <?php } else { ?>
             <p>I&rsquor;d love to hear from you. Please complete the form to give us your information</p>
-
             <form method="post" action="contact.php">
                 <table>
                     <tr>
@@ -60,6 +65,7 @@ include('inc/header.php'); ?>
                 </table>
                 <input type="submit" value="Send">
             </form>
+            <?php } ?>
         </div>
     </div>
 
