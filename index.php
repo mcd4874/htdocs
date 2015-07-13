@@ -1,6 +1,7 @@
 <?php
 $pageTittle="Shirt shopping";
-include('inc/header.php'); ?>
+include('inc/header.php');
+include ('inc/products.php'); ?>
 
 
     <div class="section banner">
@@ -25,26 +26,18 @@ include('inc/header.php'); ?>
             <h2>Minh&rsquo;s Latest Shirts</h2>
 
             <ul class="products">
-                <li><a href="#">
-                        <img src="img/shirts/harvard.jpg">
-                        <p>View Details</p>
-                    </a>
-                </li><li>
-                    <a href="#">
-                        <img src="img/shirts/college.jpg">
-                        <p>View Details</p>
-                    </a>
-                </li><li>
-                    <a href="#">
-                        <img src="img/shirts/RIT.jpg">
-                        <p>View Details</p>
-                    </a>
-                </li><li>
-                    <a href="#">
-                        <img src="img/shirts/PhiKappaTau.jpg">
-                        <p>View Details</p>
-                    </a>
-                </li>
+                <?php
+                    $total=0;
+                    $list_view='';
+                    foreach($products as $product_id=>$product){
+                        $total++;
+                    //you can echo the html text inside php code block
+                        if((count($products)-$total)<4) {
+                            $list_view=$list_view. view_list($product_id, $product);
+                        }
+                    }
+                    echo $list_view;
+                ?>
             </ul>
 
         </div>

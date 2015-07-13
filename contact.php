@@ -7,9 +7,26 @@
  * Otherwise this code won't work
  * */
 if($_SERVER['REQUEST_METHOD']=="POST"){
-    $name=$_POST['name'];
-    $email=$_POST['email'];
-    $message=$_POST['message'];
+    $name=trim($_POST['name']);
+    $email=trim($_POST['email']);
+    $message=trim($_POST['message']);
+//    valide your code if no information are entered correctly
+    if($name=="" or $email=="" or $message==""){
+        echo "you must specify for name,email or message";
+        exit;
+    }
+    //check the validate of the form
+    foreach ($_POST as $value){
+        if(stripos($value,'Content-Type:')!=FALSE){
+            echo "problem with information enter";
+            exit;
+        }
+    }
+    //Check if the hijack robot fill out this form and stop submission
+    if ($_POST['address']!=""){
+        echo "evil robot fill out this form";
+        exit;
+    }
     $information="";
     $information=$information."Name: ".$name."\n";
     $information=$information."Email: ".$email."\n";
@@ -60,6 +77,16 @@ include('inc/header.php'); ?>
                         </th>
                         <td>
                             <textarea name="message" id="message"></textarea>
+                        </td>
+                    </tr>
+                    <!--This will make sure user can't see this form to fill out and hijack robot will fill this out if they enter information-->
+                    <tr style="display:none;">
+                        <th>
+                            <label for="address">Address</label>
+                        </th>
+                        <td>
+                            <input type="text" name="address" id="address">
+                            <p>Don't fill out this area</p>
                         </td>
                     </tr>
                 </table>
